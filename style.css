@@ -1,0 +1,332 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('background.jpeg');
+    background-size: cover;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 100%;
+    margin-left: 5%;
+    max-width: 1400px;
+    padding: 20px;
+}
+
+.button-1{
+    background-color: green;
+}
+
+h1, h2, h3 {
+    color: #327ef0;
+    text-align: center;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    color: #000;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+    transition: 0.3s;
+}
+
+
+
+/* Login Page Styles */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #4e54c8, #8f94fb);
+    background-image: url('images/background.jpg'); 
+    background-size: cover;
+}
+
+/* Style for the Average Health Metrics section */
+.dashboard {
+    background: rgba(255, 255, 255, 0.9); /* Light background with transparency */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Inner spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    margin: 20px 0; /* Space between sections */
+    text-align: center; /* Center-align text */
+}
+
+/* Heading styling */
+.dashboard h2 {
+    font-size: 24px;
+    color: #007bff; /* Blue color */
+    margin-bottom: 15px;
+}
+
+/* Style for the health metric values */
+.dashboard p {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+/* Different colors for each metric */
+#avgWeight {
+    color: #28a745; /* Green */
+}
+
+#avgSteps {
+    color: #ff9800; /* Orange */
+}
+
+#avgCalories {
+    color: #dc3545; /* Red */
+}
+
+#avgSleep {
+    color: #6f42c1; /* Purple */
+}
+
+/* Hover effect */
+.dashboard:hover {
+    transform: scale(1.02);
+    transition: 0.3s ease-in-out;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 300px;
+}
+
+.login-box h1 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffb74d;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.login-box button:hover {
+    background-color: #ffa726;
+}
+
+/* Register Page Styles */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #a1a1a1, #a48e95);
+    background-image: url('images/background.jpg'); /* Ensure the path is correct */
+    background-size: cover;
+}
+
+.register-box {
+    background: rgba(237, 61, 61, 0.1);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 400px;
+}
+
+.register-box h1 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.register-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.register-box button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffb74d;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.register-box button:hover {
+    background-color: #ffa726;
+}
+
+/* Main Page Styles */
+.main-page {
+    background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+    min-height: 100vh;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007bff;
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+
+.nav-logo {
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: white;
+    color: #007bff;
+}
+
+.logout {
+    background: red;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.logout:hover {
+    background: darkred;
+    color: white;
+}
+
+
+
+
+.main-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboard {
+    color: #fff;
+    background: rgba(105, 227, 254, 0.861);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.dashboard h2 {
+    color: #fff;
+    text-align: center;
+}
+
+.dashboard img.icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.dashboard button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #070501;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dashboard button{
+    background-color: rgb(15, 55, 199);
+}
+
+.dashboard button:hover {
+    background-color: #223034;
+}
+
+/* Health Benefits Section */
+.health-benefits {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.health-benefits div {
+    margin-bottom: 20px;
+}
+
+.icon{
+    width: 100px;
+}
+
