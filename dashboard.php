@@ -58,6 +58,9 @@ if (count($metrics) > 0) {
     $avg_calories /= count($metrics);
     $avg_sleep /= count($metrics);
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +72,7 @@ if (count($metrics) > 0) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- <?php echo $steps?> -->
     <div class="container">
         <nav class="navbar">
         <div class="nav-logo">Health Monitor</div>
@@ -76,9 +80,17 @@ if (count($metrics) > 0) {
                 <li><a href="dashboard.php" class="nav-item">Dashboard</a></li>
                 <li><a href="visualization.php" class="nav-item">Visualization</a></li>
                 <li><a href="tips.php" class="nav-item">Tips</a></li>
+                <li>
+                    <?php if (isset($_SESSION['fitbit_access_token'])): ?>
+                        <a href="fitbit-auth.php" class="nav-item">Refresh</a>
+                    <?php else: ?>
+                        <a href="fitbit-auth.php" class="nav-item">Connect to Fitbit</a>
+                    <?php endif; ?>
+                </li>
                 <li><a href="logout.php" class="nav-item logout">Logout</a></li>
             </ul>
         </nav>
+
         <div class="dashboard">
             <h2>Welcome, <?php echo $user_data['name']; ?>!</h2>
             <p>Goal: <?php echo $user_data['goal']; ?></p>
@@ -92,6 +104,37 @@ if (count($metrics) > 0) {
                 <button type="submit">Submit</button>
             </form>
         </div>
+
+        <div id="fitbit-data">
+    Loading Fitbit data...
+</div>  
+
+<script>
+    function fetchData() {
+        fetch('fetch_fitbit_data.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.activities) {
+                    let summary = data.summary;
+                    let html = `
+                        <h3>Today's Activity Summary</h3>
+                        <ul>
+                            <li><strong>Steps:</strong> ${summary.steps}</li>
+                            <li><strong>Calories Burned:</strong> ${summary.caloriesOut}</li>
+                            <li><strong>Distance:</strong> ${summary.distances[0].distance} km</li>
+                            <li><strong>Very Active Minutes:</strong> ${summary.veryActiveMinutes}</li>
+                        </ul>
+                    `;
+                    document.getElementById('fitbit-data').innerHTML = html;
+                } else {
+                    document.getElementById('fitbit-data').innerHTML = "<p>Could not fetch data</p>";
+                }
+            });
+    }
+
+    fetchData();
+    setInterval(fetchData, 3000); 
+</script>
         <div class="dashboard">
             <h2>Your Health Metrics</h2>
             <table>
@@ -124,19 +167,11 @@ if (count($metrics) > 0) {
         </div>
         <div id="heartRateContainer">Loading...</div> <!-- Data will be shown here -->
 
-    <!-- <script>
-        fetch("get-heart-rate.php")
-            .then(response => response.json())
-            .then(data => {
-                let heartRateData = data["activities-heart"];
-                let output = "";
-                heartRateData.forEach(day => {
-                    output += `<p>Date: ${day.dateTime} - Heart Rate: ${JSON.stringify(day.value)}</p>`;
-                });
-                document.getElementById("heartRateContainer").innerHTML = output;
-            })
-            .catch(error => console.error("Error:", error));
-    </script> -->
+
+        <div>
+           
+        </div>
+        
 
     </div>
 </body>

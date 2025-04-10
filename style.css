@@ -2,7 +2,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('background.jpeg');
+    background-image: url('./Images/background.jpeg');
     background-size: cover;
     background-color: #f5f5f5;
 }
@@ -65,7 +65,7 @@ tr:hover {
     align-items: center;
     height: 100vh;
     background: linear-gradient(to bottom, #4e54c8, #8f94fb);
-    background-image: url('images/background.jpg'); 
+    background-image: url('./Images/background.jpeg'); 
     background-size: cover;
 }
 
@@ -162,7 +162,7 @@ tr:hover {
     align-items: center;
     height: 100vh;
     background: linear-gradient(to bottom, #a1a1a1, #a48e95);
-    background-image: url('images/background.jpg'); /* Ensure the path is correct */
+    background-image: url('./Images/background.jpeg'); /* Ensure the path is correct */
     background-size: cover;
 }
 
@@ -264,6 +264,19 @@ tr:hover {
     color: white;
 }
 
+#fitbit-data {
+    background: rgba(105, 227, 254, 0.861);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+#fitbit-data ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+#fitbit-data li {
+    margin: 8px 0;
+}
 
 
 

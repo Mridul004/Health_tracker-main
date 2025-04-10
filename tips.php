@@ -10,15 +10,15 @@
 <div class="health-benefits">
             <h2>Health Benefits</h2>
             <div>
-                <img src="water.jpg" alt="Drink Water" class="icon">
+                <img src="./Images/water.jpg" alt="Drink Water" class="icon">
                 <p><strong>Drinking Water:</strong> Helps maintain the balance of bodily fluids, keeps skin looking good, and energizes muscles.</p>
             </div>
             <div>
-                <img src="sleep.jpg" alt="Sleep" class="icon">
+                <img src="./Images/sleep.jpeg" alt="Sleep" class="icon">
                 <p><strong>Sleep:</strong> Supports cognitive function, improves mood, and helps maintain physical health.</p>
             </div>
             <div>
-                <img src="food.jpg" alt="Healthy Food" class="icon">
+                <img src="./Images/food.jpeg" alt="Healthy Food" class="icon">
                 <p><strong>Healthy Food:</strong> Provides essential nutrients, supports immune function, and reduces the risk of chronic diseases.</p>
             </div>
         </div>
