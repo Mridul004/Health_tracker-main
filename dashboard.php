@@ -22,7 +22,6 @@ $stmt->bind_param("s", $user);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// $result = $conn->query($sql);
 $user_data = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -70,6 +69,28 @@ if (count($metrics) > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <script> 
+       setTimeout(() => {
+        data=JSON.parse(localStorage.getItem("response"));
+        console.log(data);
+        if (data.activities) {
+            console.log(data.summary);
+                    let summary = data.summary;
+                    let html = `
+                        <h3>Today's Activity Summary</h3>
+                        <ul>
+                            <li><strong>Steps:</strong> ${summary.steps}</li>
+                            <li><strong>Calories Burned:</strong> ${summary.caloriesOut}</li>
+                            <li><strong>Distance:</strong> ${summary.distances[0].distance} km</li>
+                            <li><strong>Very Active Minutes:</strong> ${summary.veryActiveMinutes}</li>
+                        </ul>
+                    `;
+                    document.getElementById('fitbit-data').innerHTML = html;
+                } else {
+                    document.getElementById('fitbit-data').innerHTML = "<p>Could not fetch data</p>";
+                }
+       }, 1000);
+    </script>
 </head>
 <body>
     <!-- <?php echo $steps?> -->
@@ -109,11 +130,43 @@ if (count($metrics) > 0) {
     Loading Fitbit data...
 </div>  
 
+<div class="dashboard">
+    <h2>Fitbit Data Management</h2>
+    <button id="storeMonthlyData" class="btn">Store Monthly Fitbit Data</button>
+    <div id="storeStatus"></div>
+</div>
+
+<script>
+document.getElementById('storeMonthlyData').addEventListener('click', function() {
+    document.getElementById('storeStatus').innerHTML = 'Fetching and storing data, please wait...';
+    
+    fetch('store_fitbit_monthly.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                document.getElementById('storeStatus').innerHTML = 
+                    `<p style="color:green">${data.message}<br>Processed ${data.resources_processed} resources.</p>`;
+            } else {
+                document.getElementById('storeStatus').innerHTML = 
+                    `<p style="color:red">Error: ${data.error || 'Unknown error occurred'}</p>`;
+            }
+        })
+        .catch(error => {
+            document.getElementById('storeStatus').innerHTML = 
+                `<p style="color:red">Error: ${error.message}</p>`;
+        });
+});
+</script>
+
+
+
 <script>
     function fetchData() {
         fetch('fetch_fitbit_data.php')
             .then(response => response.json())
             .then(data => {
+                let response=JSON.parse(localStorage.getItem("response"));
+                if(response.summary) localStorage.setItem("response",JSON.stringify(data));
                 if (data.activities) {
                     let summary = data.summary;
                     let html = `
@@ -122,7 +175,7 @@ if (count($metrics) > 0) {
                             <li><strong>Steps:</strong> ${summary.steps}</li>
                             <li><strong>Calories Burned:</strong> ${summary.caloriesOut}</li>
                             <li><strong>Distance:</strong> ${summary.distances[0].distance} km</li>
-                            <li><strong>Very Active Minutes:</strong> ${summary.veryActiveMinutes}</li>
+                            <li><strong>Very Active Minutes:</strong> ${summary.veryActiveMinutes} minutes</li>
                         </ul>
                     `;
                     document.getElementById('fitbit-data').innerHTML = html;
@@ -133,7 +186,7 @@ if (count($metrics) > 0) {
     }
 
     fetchData();
-    setInterval(fetchData, 3000); 
+    setInterval(fetchData, 300000); 
 </script>
         <div class="dashboard">
             <h2>Your Health Metrics</h2>
@@ -158,14 +211,46 @@ if (count($metrics) > 0) {
                 <?php endforeach; ?>
             </table>
         </div>
-        <div class="dashboard">
+        <!-- <div class="dashboard">
             <h2>Average Health Metrics</h2>
             <p>Average Weight: <span id="avgWeight"><?php echo number_format($avg_weight ,1); ?></span> kg</p>
             <p>Average Steps: <span id="avgSteps"><?php echo number_format($avg_steps,1); ?></span></p>
             <p>Average Calories: <span id="avgCalories"><?php echo number_format($avg_calories,0); ?></span></p>
             <p>Average Sleep Hours: <span id="avgSleep"><?php echo number_format($avg_sleep,1); ?></span> hours</p>
         </div>
-        <div id="heartRateContainer">Loading...</div> <!-- Data will be shown here -->
+        <div id="heartRateContainer">Loading...</div> Data will be shown here -->
+
+        <div class="dashboard" style="display: flex; justify-content: space-around; background-color:gold; padding: 30px; border-radius: 20px; color: white; text-align: center; flex-wrap: wrap;">
+
+    <!-- Weight -->
+    <div class="metric-box">
+        <img src="./Images/weight.jpeg" alt="Weight" style="height: 60px;"><br>
+        <strong>Average Weight</strong>
+        <p style="font-size: 18px;"><?php echo isset($avg_weight) ? number_format($avg_weight, 1) : "N/A"; ?> kg</p>
+    </div>
+
+    <!-- Steps -->
+    <div class="metric-box" >
+        <img src="./Images/Steps.png" alt="Steps" style="height: 60px;"><br>
+        <strong>Average Steps</strong>
+        <p style="font-size: 18px;"><?php echo isset($avg_steps) ? number_format($avg_steps, 1) : "0"; ?></p>
+    </div>
+
+    <!-- Calories -->
+    <div class="metric-box" >
+        <img src="./Images/calories.jpeg" alt="Calories" style="height: 60px;"><br>
+        <strong>Average Calories</strong>
+        <p style="font-size: 18px;"><?php echo isset($avg_calories) ? number_format($avg_calories, 0) : "0"; ?> cal</p>
+    </div>
+
+    <!-- Sleep -->
+    <div class="metric-box" >
+        <img src="./Images/night.jpeg" alt="Sleep" style="height: 60px;"><br>
+        <strong>Average Sleep</strong>
+        <p style="font-size: 18px;"><?php echo isset($avg_sleep) ? number_format($avg_sleep, 1) : "0"; ?> hrs</p>
+    </div>
+
+</div>
 
 
         <div>
